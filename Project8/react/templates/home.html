@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Smart Agri Home</title>
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.20/dist/full.css" rel="stylesheet" type="text/css" />
+  <script src="https://kit.fontawesome.com/f40602f276.js" crossorigin="anonymous"></script>
+  <style>
+    body {
+      background: #101010;
+      color: #fff;
+      font-family: 'Salsa', cursive, sans-serif;
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .hero-section {
+      height: 100vh;
+      width: 100%;
+      background: url('https://images.unsplash.com/photo-1582281298056-d4e7f1f08a6f?auto=format&fit=crop&w=1500&q=80') no-repeat center center/cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 1;
+    }
+
+    .hero-text {
+      position: relative;
+      text-align: center;
+      color: white;
+      z-index: 2;
+      padding: 20px;
+    }
+
+    .hero-text h1 {
+      font-size: 60px;
+      color: #ff004f;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    .hero-text p {
+      font-size: 24px;
+      margin-top: 20px;
+      animation: fadeInUp 2s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Navbar CSS with transparent background */
+    nav, .navbar {
+      background-color: rgba(255, 0, 79, 0.0); /* transparent */
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 100;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+    }
+
+    .navbar .left, nav .left {
+      display: flex;
+      align-items: center;
+    }
+
+    .navbar a, nav a {
+      color: white;
+      text-decoration: none;
+      margin-right: 20px;
+      font-weight: bold;
+      font-size: 1rem;
+      border-bottom: 2px solid transparent;
+      transition: all 0.3s ease;
+    }
+
+    .navbar a:hover, nav a:hover {
+      color: #fff;
+      border-color: #fff;
+      background: rgba(255,255,255,0.08);
+      border-radius: 4px;
+    }
+
+    /* Custom style for transparent navbar buttons */
+    .navbar .navbar-start .nav-transparent-btn {
+      background: transparent !important;
+      border: none !important;
+      color: #fff !important;
+      box-shadow: none !important;
+      margin-right: 20px;
+      font-weight: bold;
+      font-size: 1rem;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      transition: background 0.2s;
+    }
+    .navbar .navbar-start .nav-transparent-btn:hover {
+      background: rgba(255,255,255,0.08) !important;
+      color: #fff !important;
+    }
+
+    .navbar-center h2 {
+      color: #fff;
+      margin: 0;
+      font-size: 1.5rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    .navbar-end button {
+      margin-left: 10px;
+    }
+
+    .subscribe {
+      text-align: center;
+      margin: 2.5rem 0 1.5rem 0;
+    }
+
+    .subscribe h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: #ff004f;
+    }
+
+    .subscribe button {
+      background: #ff004f;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      padding: 0.7rem 1.5rem;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .subscribe button:hover {
+      background: #d6003a;
+    }
+
+    footer {
+      background: #181818;
+      color: #ababab;
+      text-align: center;
+      padding: 1.2rem 0;
+      margin-top: auto;
+      font-size: 1rem;
+      letter-spacing: 0.5px;
+    }
+
+    @media (max-width: 768px) {
+      .hero-text h1 {
+        font-size: 36px;
+      }
+      .hero-text p {
+        font-size: 18px;
+      }
+      nav, .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1rem;
+      }
+      .navbar-center {
+        margin: 0.5rem 0;
+      }
+      .navbar-end {
+        width: 100%;
+        justify-content: flex-end;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <div class="navbar">
+    <div class="navbar-start left gap-2 pl-4">
+      <a href="/recommend" class="nav-transparent-btn">Recommendation</a>
+      <a href="/about" class="nav-transparent-btn">About</a>
+    </div>
+    <div class="navbar-center">
+      <h2 class="text-xl font-bold">Smart Agri</h2>
+    </div>
+    <div class="navbar-end pr-4 flex gap-2">
+      <!-- Sign In Button -->
+      <button class="btn btn-outline" onclick="document.getElementById('loginModal').showModal()">Sign In</button>
+    
+      <!-- Sign Up Button -->
+      <button class="btn btn-outline" onclick="document.getElementById('signupModal').showModal()">Sign Up</button>
+    </div>
+    
+    <!-- Login Modal -->
+    <dialog id="loginModal" class="modal">
+      <form method="dialog" class="modal-box" onsubmit="return handleLogin(event)">
+        <h3 class="font-bold text-lg">Login</h3>
+        <input type="text" id="login-username" placeholder="Username" class="input input-bordered w-full my-2" required>
+        <input type="password" id="login-password" placeholder="Password" class="input input-bordered w-full my-2" required>
+        <div class="modal-action">
+          <button type="submit" class="btn">Login</button>
+          <button class="btn" onclick="loginModal.close()">Cancel</button>
+        </div>
+      </form>
+    </dialog>
+    
+    <!-- Signup Modal -->
+    <dialog id="signupModal" class="modal">
+      <form method="dialog" class="modal-box" onsubmit="return handleSignup(event)">
+        <h3 class="font-bold text-lg">Sign Up</h3>
+        <input type="text" id="signup-username" placeholder="Username" class="input input-bordered w-full my-2" required>
+        <input type="password" id="signup-password" placeholder="Password" class="input input-bordered w-full my-2" required>
+        <div class="modal-action">
+          <button type="submit" class="btn">Sign Up</button>
+          <button class="btn" onclick="signupModal.close()">Cancel</button>
+        </div>
+      </form>
+    </dialog>
+    
+  </div>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="overlay"></div>
+    <div class="hero-text">
+      <h1><i class="fas fa-tractor"></i> Smart Agriculture</h1>
+      <p>Empowering Farmers with AI, Data & Sustainability</p>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <script>
+    async function handleLogin(e) {
+      e.preventDefault();
+      const username = document.getElementById('login-username').value;
+      const password = document.getElementById('login-password').value;
+  
+      const res = await fetch('/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: `username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`
+      });
+  
+      const text = await res.text();
+      document.body.innerHTML = text; // Replace page with server response
+    }
+  
+    async function handleSignup(e) {
+      e.preventDefault();
+      const username = document.getElementById('signup-username').value;
+      const password = document.getElementById('signup-password').value;
+  
+      const res = await fetch('/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: `username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`
+      });
+  
+      const text = await res.text();
+      document.body.innerHTML = text; // Replace page with server response
+    }
+  </script>
+  

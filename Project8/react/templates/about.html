@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Contact - Smart Agri</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Salsa', cursive;
+            background-color: black;
+            color: white;
+        }
+
+        nav {
+            background-color: rgba(255, 0, 79, 0.0);;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        nav .left {
+            display: flex;
+            align-items: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 3rem auto;
+            padding: 2rem;
+            background-color: #121212;
+            border-radius: 12px;
+        }
+
+        h2 {
+            color: #ff004f;
+            text-align: center;
+        }
+
+        .contact-info {
+            margin-top: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .social-icons {
+            margin-top: 1.5rem;
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+        }
+
+        .social-icons a {
+            color: white;
+            font-size: 1.8rem;
+            transition: transform 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: #ff004f;
+            transform: scale(1.2);
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="left">
+            <a href="/">Home</a>
+            <a href="/recommend">Recommend</a>
+        </div>
+      
+    </nav>
+
+    <div class="container">
+        <h2>Contact Me</h2>
+        <div class="contact-info">
+            <p><strong>Name:</strong> Avdhut Salunkhe</p>
+            <p><strong>Email:</strong> avdhutsalunkhe@example.com</p>
+            <p><strong>Phone:</strong> +91-9876543210</p>
+        </div>
+        <div class="social-icons">
+            <a href="https://github.com/" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://linkedin.com/" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="https://twitter.com/" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="mailto:avdhutsalunkhe@example.com"><i class="fas fa-envelope"></i></a>
+        </div>
+    </div>
+
+    <!-- GSAP CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script>
+        gsap.from(".container", {
+            y: 100,
+            opacity: 0,
+            duration: 1.5,
+            ease: "power3.out"
+        });
+
+        gsap.from(".social-icons a", {
+            scale: 0,
+            opacity: 0,
+            stagger: 0.2,
+            delay: 0.5,
+            duration: 1,
+            ease: "back.out(1.7)"
+        });
+    </script>
+</body>
+</html>

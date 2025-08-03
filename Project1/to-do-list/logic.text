@@ -1,0 +1,110 @@
+Great mindset! Understanding the logic behind a project helps you write your own code confidently. Here's the **logic behind the To-Do List project**, broken down into **core concepts**:
+
+---
+
+## 🔍 Project: To-Do List (Command Line)
+
+### 🎯 Objective:
+
+Let users manage a simple task list: add, view, mark done, delete tasks — all from the terminal.
+
+---
+
+## 🧠 Core Concepts/Logic:
+
+### 1. **Data Storage**
+
+* Use a **list** to store tasks.
+* Each task can be represented as a **dictionary**:
+
+  ```python
+  {"task": "Buy milk", "done": False}
+  ```
+* This allows storing both **task content** and its **completion status**.
+
+---
+
+### 2. **Menu Display**
+
+* Use a loop to keep showing a **menu of options**:
+
+  * Add
+  * View
+  * Mark Done
+  * Delete
+  * Exit
+* Ask user for a choice using `input()`.
+
+---
+
+### 3. **Adding a Task**
+
+* Ask user to enter a task string.
+* Create a dictionary like `{"task": "Your Task", "done": False}`.
+* Append it to the list.
+
+---
+
+### 4. **Viewing Tasks**
+
+* Loop over the list using `enumerate()`.
+* Print each task with:
+
+  * Task number
+  * Task content
+  * Status: "Done" or "Pending"
+
+---
+
+### 5. **Marking Task as Done**
+
+* First show the list so user can choose a task number.
+* Convert user input to the list index: `index = number - 1`.
+* Change `"done"` value to `True` for that dictionary.
+
+---
+
+### 6. **Deleting a Task**
+
+* Same as mark done: show tasks and take input.
+* Use `list.pop(index)` to remove the task.
+
+---
+
+### 7. **Looping Until Exit**
+
+* Use a `while True:` loop to keep running.
+* Exit only when user selects the "Exit" option.
+
+---
+
+## 🧱 Summary of Logic Flow:
+
+```
+Start loop
+│
+├─ Show Menu
+│
+├─ Ask for user's choice
+│
+├─ If 1: Add Task → Append new task to list
+│
+├─ If 2: View Tasks → Loop through and display tasks
+│
+├─ If 3: Mark Done → Ask task number, set 'done' = True
+│
+├─ If 4: Delete Task → Ask task number, remove from list
+│
+└─ If 5: Exit loop
+```
+
+---
+
+## 💡 Tips for Your Version:
+
+* You can use only strings instead of dictionaries if you want a simpler version (but won’t track "done"/"pending").
+* Try saving tasks to a file (`open`, `write`, `readlines`) to make them persistent.
+
+---
+
+Want help designing your own version of it, or ideas to expand it (like deadlines or priorities)?
