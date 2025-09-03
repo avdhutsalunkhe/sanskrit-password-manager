@@ -1,0 +1,56 @@
+/* Enhanced button animations */
+.btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+}
+
+.btn-secondary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Loading state for buttons */
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+/* Enhanced modal backdrop */
+#passwordModal {
+    backdrop-filter: blur(4px);
+    animation: fadeIn 0.2s ease-out;
+}
+
+/* Tooltip styling */
+.tooltip {
+    animation: fadeIn 0.2s ease-out;
+}
+
+/* Alert animations */
+.alert-notification {
+    animation: slideInRight 0.3s ease-out;
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Responsive button adjustments */
+@media (max-width: 640px) {
+    .flex-wrap.gap-2 {
+        flex-direction: column;
+    }
+    
+    .flex-wrap.gap-2 button {
+        width: 100%;
+        justify-content: center;
+    }
+}

@@ -1,0 +1,171 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="relative pt-16 bg-white text-gray-900 overflow-hidden">
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div class="text-center">
+            <div class="animate-fade-in">
+                <div class="inline-block bg-gray-100 rounded-full px-4 py-2 mb-6">
+                    <span class="text-sm font-medium">🕉️ Sanskrit-Powered Security</span>
+                </div>
+                <h1 class="text-4xl md:text-6xl font-bold mb-6">
+                    Sanskrit Password
+                    <span class="text-orange-500 block">Manager</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-700 mb-8 max-w-3xl mx-auto">
+                    Secure passwords with the wisdom of Sanskrit. Generate unique, culturally-inspired passwords that combine ancient wisdom with modern cryptography.
+                </p>
+            </div>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+                <a href="{{ url_for('register') }}" class="bg-red-600 text-white px-8 py-3 rounded-lg font-semibold text-lg hover:bg-red-700 transition-colors">
+                    <i class="fas fa-rocket mr-2"></i>Get Started Free
+                </a>
+                <a href="{{ url_for('login') }}" class="border-2 border-red-600 text-red-600 px-8 py-3 rounded-lg font-semibold text-lg hover:bg-red-600 hover:text-white transition-colors">
+                    <i class="fas fa-sign-in-alt mr-2"></i>Sign In
+                </a>
+            </div>
+            
+            <!-- Stats -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto">
+                <div class="text-center">
+                    <div class="text-3xl font-bold text-gray-900">256-bit</div>
+                    <div class="text-sm text-gray-500">Encryption</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl font-bold text-gray-900">∞</div>
+                    <div class="text-sm text-gray-500">Passwords</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl font-bold text-gray-900">24/7</div>
+                    <div class="text-sm text-gray-500">Secure Access</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl font-bold text-gray-900">🕉️</div>
+                    <div class="text-sm text-gray-500">Sanskrit Power</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                Why Choose Sanskrit Passwords?
+            </h2>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                Combine the cultural richness of Sanskrit with cutting-edge security technology
+            </p>
+        </div>
+        
+        <div class="grid md:grid-cols-3 gap-8">
+            <!-- Feature 1 -->
+            <div class="card-hover bg-white rounded-xl p-8 shadow-lg">
+                <div class="text-center">
+                    <div class="inline-flex items-center justify-center w-16 h-16 bg-red-100 rounded-full mb-6">
+                        <i class="fas fa-language text-red-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Sanskrit Wisdom</h3>
+                    <p class="text-gray-600">
+                        Generate passwords using meaningful Sanskrit words that are harder for attackers to predict yet easier for you to remember.
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Feature 2 -->
+            <div class="card-hover bg-white rounded-xl p-8 shadow-lg">
+                <div class="text-center">
+                    <div class="inline-flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-6">
+                        <i class="fas fa-shield-alt text-green-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Military-Grade Security</h3>
+                    <p class="text-gray-600">
+                        AES-256 encryption ensures your passwords are protected with the same security used by governments and military.
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Feature 3 -->
+            <div class="card-hover bg-white rounded-xl p-8 shadow-lg">
+                <div class="text-center">
+                    <div class="inline-flex items-center justify-center w-16 h-16 bg-blue-100 rounded-full mb-6">
+                        <i class="fas fa-cloud text-blue-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Cross-Platform Access</h3>
+                    <p class="text-gray-600">
+                        Access your passwords securely from any device, anywhere in the world with our responsive web interface.
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Sanskrit Quote -->
+        <div class="text-center mt-16 p-8 bg-gray-50 rounded-xl">
+            <div class="sanskrit-text text-2xl mb-4">"सुरक्षा सर्वोत्तम धर्म"</div>
+            <p class="text-gray-600 italic">
+                "Security is the highest duty" - Ancient Sanskrit wisdom for modern digital life
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- How It Works -->
+<section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                How It Works
+            </h2>
+            <p class="text-xl text-gray-600">
+                Simple steps to secure your digital life with Sanskrit wisdom
+            </p>
+        </div>
+        
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="text-center">
+                <div class="inline-flex items-center justify-center w-12 h-12 bg-red-600 text-white rounded-full font-bold text-lg mb-4">1</div>
+                <h3 class="text-xl font-bold text-gray-900 mb-4">Choose Sanskrit Words</h3>
+                <p class="text-gray-600">
+                    Select from our curated collection of meaningful Sanskrit words or let our AI choose for you.
+                </p>
+            </div>
+            
+            <div class="text-center">
+                <div class="inline-flex items-center justify-center w-12 h-12 bg-red-600 text-white rounded-full font-bold text-lg mb-4">2</div>
+                <h3 class="text-xl font-bold text-gray-900 mb-4">Add Security Elements</h3>
+                <p class="text-gray-600">
+                    Combine with numbers, symbols, and capitalization to create mathematically strong passwords.
+                </p>
+            </div>
+            
+            <div class="text-center">
+                <div class="inline-flex items-center justify-center w-12 h-12 bg-red-600 text-white rounded-full font-bold text-lg mb-4">3</div>
+                <h3 class="text-xl font-bold text-gray-900 mb-4">Store Securely</h3>
+                <p class="text-gray-600">
+                    Your passwords are encrypted and stored safely, accessible only to you with your master key.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6 text-gray-900">
+            Ready to Secure Your Digital Life?
+        </h2>
+        <p class="text-xl text-gray-700 mb-8 max-w-2xl mx-auto">
+            Join thousands who trust Sanskrit Password Manager for their security needs.
+        </p>
+        <a href="{{ url_for('register') }}" class="inline-flex items-center bg-red-600 text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-red-700 transition-colors">
+            <i class="fas fa-shield-alt mr-3"></i>
+            Start Protecting Now - It's Free!
+        </a>
+    </div>
+</section>
+{% endblock %}

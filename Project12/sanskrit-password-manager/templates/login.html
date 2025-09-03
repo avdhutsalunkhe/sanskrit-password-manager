@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %}Login - Sanskrit Password Manager{% endblock %}
+
+{% block content %}
+<div class="min-h-screen pt-16 bg-white flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-md w-full space-y-8">
+        <div class="text-center">
+            <i class="fas fa-shield-alt text-red-600 text-5xl mb-4"></i>
+            <h2 class="text-3xl font-bold text-gray-900">Sign in to your account</h2>
+            <p class="mt-2 text-gray-600">
+                Access your secure password vault
+            </p>
+        </div>
+        
+        <div class="bg-white rounded-xl shadow-lg p-8">
+            <form method="POST" class="space-y-6">
+                <div>
+                    <label for="username" class="block text-sm font-medium text-gray-700 mb-2">
+                        <i class="fas fa-user mr-2"></i>Username
+                    </label>
+                    <input type="text" id="username" name="username" required
+                           class="input-field focus:ring-red-500 focus:border-red-500"
+                           placeholder="Enter your username">
+                </div>
+                
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-700 mb-2">
+                        <i class="fas fa-lock mr-2"></i>Password
+                    </label>
+                    <input type="password" id="password" name="password" required
+                           class="input-field focus:ring-red-500 focus:border-red-500"
+                           placeholder="Enter your password">
+                </div>
+                
+                <button type="submit" class="w-full btn-primary text-lg py-3">
+                    <i class="fas fa-sign-in-alt mr-2"></i>
+                    Sign In
+                </button>
+            </form>
+            
+            <div class="mt-6 text-center">
+                <p class="text-gray-600">
+                    Don't have an account?
+                    <a href="{{ url_for('register') }}" class="text-red-600 hover:text-red-700 font-medium">
+                        Create one here
+                    </a>
+                </p>
+            </div>
+            
+            <!-- Sanskrit Quote -->
+            <div class="mt-8 p-4 bg-white rounded-lg text-center">
+                <div class="sanskrit-text text-lg mb-2">"ज्ञानमेव परं बलम्"</div>
+                <p class="text-sm text-gray-600">
+                    "Knowledge is the ultimate strength"
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

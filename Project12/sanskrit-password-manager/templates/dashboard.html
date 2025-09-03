@@ -1,0 +1,368 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - Sanskrit Password Manager{% endblock %}
+
+{% block content %}
+<div class="pt-16 bg-white min-h-screen">
+    <!-- Hero Section -->
+    <div class="bg-white text-red-700 py-12 border-b border-red-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="text-3xl md:text-4xl font-bold mb-4">Password Dashboard</h1>
+                <p class="text-xl text-red-500">Manage your secure passwords with Sanskrit wisdom</p>
+                <div class="mt-6">
+                    <a href="{{ url_for('generate_password_page') }}" class="bg-red-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors">
+                        <i class="fas fa-plus mr-2"></i>Generate New Password
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="grid lg:grid-cols-3 gap-8">
+            <!-- Main Content -->
+            <div class="lg:col-span-2">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-bold text-gray-900">
+                        <i class="fas fa-shield-alt text-red-600 mr-2"></i>
+                        Your Saved Passwords
+                    </h2>
+                    <span class="bg-red-100 text-red-800 px-3 py-1 rounded-full font-medium">
+                        {{ passwords|length }} Total
+                    </span>
+                </div>
+
+                {% if passwords and passwords|length > 0 %}
+                    <div class="space-y-4">
+                        {% for password in passwords %}
+                        <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover border border-gray-100">
+                            <!-- Header -->
+                            <div class="bg-white border-b border-red-100 p-4">
+                                <div class="flex justify-between items-center">
+                                    <div class="flex items-center">
+                                        <div class="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center mr-3">
+                                            <i class="fas fa-globe text-red-600"></i>
+                                        </div>
+                                        <h3 class="font-bold text-lg text-gray-900">{{ password.website }}</h3>
+                                    </div>
+                                    <span class="text-sm text-gray-500">
+                                        {% if password.created_at %}
+                                            {{ password.created_at.strftime('%d %b %Y') }}
+                                        {% endif %}
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- Body -->
+                            <div class="p-6">
+                                <div class="grid md:grid-cols-2 gap-4 mb-4">
+                                    <div class="bg-white border border-gray-100 p-3 rounded-lg">
+                                        <label class="text-sm font-medium text-gray-600 uppercase tracking-wide">Username</label>
+                                        <div class="flex items-center mt-1">
+                                            <i class="fas fa-user text-gray-400 mr-2"></i>
+                                            <span class="text-gray-900 font-medium">{{ password.username }}</span>
+                                        </div>
+                                    </div>
+                                    {% if password.sanskrit_hint %}
+                                    <div class="bg-white border border-gray-100 p-3 rounded-lg">
+                                        <label class="text-sm font-medium text-gray-600 uppercase tracking-wide">Sanskrit Hint</label>
+                                        <div class="flex items-center mt-1">
+                                            <i class="fas fa-language text-red-600 mr-2"></i>
+                                            <span class="sanskrit-text font-medium">{{ password.sanskrit_hint }}</span>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                </div>
+
+                                <!-- Actions -->
+                                <div class="flex flex-wrap gap-2">
+                                    <button type="button" 
+                                            onclick="showPassword('{{ password.id }}')"
+                                            class="btn-primary flex-1 sm:flex-none transition-all duration-200 hover:scale-105"
+                                            data-tooltip="View password securely"
+                                            aria-label="Show password for {{ password.website }}">
+                                        <i class="fas fa-eye mr-2" aria-hidden="true"></i>Show Password
+                                    </button>
+                                    <button type="button" 
+                                            onclick="copyPassword('{{ password.id }}')" 
+                                            class="btn-secondary transition-all duration-200 hover:scale-105"
+                                            data-tooltip="Copy password to clipboard"
+                                            aria-label="Copy password for {{ password.website }}">
+                                        <i class="fas fa-copy mr-2" aria-hidden="true"></i>Copy
+                                    </button>
+                                    <button type="button"
+                                            onclick="deletePassword('{{ password.id }}')"
+                                            class="bg-red-100 hover:bg-red-200 text-red-700 font-medium py-2 px-4 rounded-lg transition-all duration-200 hover:scale-105 hover:shadow-md"
+                                            data-tooltip="Delete password permanently"
+                                            aria-label="Delete password for {{ password.website }}">
+                                        <i class="fas fa-trash mr-2" aria-hidden="true"></i>Delete
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <!-- Empty State -->
+                    <div class="text-center py-16">
+                        <div class="mb-6">
+                            <i class="fas fa-lock text-gray-400 text-6xl mb-4"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">No Passwords Yet</h3>
+                        <p class="text-gray-600 mb-6">
+                            Start securing your digital life with Sanskrit-inspired passwords
+                        </p>
+                        <a href="{{ url_for('generate_password_page') }}" class="btn-primary text-lg">
+                            <i class="fas fa-plus mr-2"></i>Generate Your First Password
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Sidebar -->
+            <div class="lg:col-span-1">
+                <!-- Quick Actions -->
+                <div class="bg-white rounded-xl shadow-lg p-6 mb-6 border border-gray-100">
+                    <h3 class="text-lg font-bold text-gray-900 mb-4">
+                        <i class="fas fa-bolt text-yellow-500 mr-2"></i>Quick Actions
+                    </h3>
+                    <div class="space-y-3">
+                        <a href="{{ url_for('generate_password_page') }}" class="w-full btn-primary text-center block">
+                            <i class="fas fa-key mr-2"></i>Generate Password
+                        </a>
+                        <button type="button" class="w-full btn-secondary" onclick="exportPasswords()">
+                            <i class="fas fa-download mr-2"></i>Export Data
+                        </button>
+                        <button type="button" class="w-full bg-blue-100 hover:bg-blue-200 text-blue-700 font-medium py-2 px-4 rounded-lg transition-colors" onclick="showSecurityTips()">
+                            <i class="fas fa-lightbulb mr-2"></i>Security Tips
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Stats -->
+                <div class="bg-white rounded-xl shadow-lg p-6 mb-6 border border-gray-100">
+                    <h3 class="text-lg font-bold text-gray-900 mb-4">
+                        <i class="fas fa-chart-bar text-blue-600 mr-2"></i>Your Security Stats
+                    </h3>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="text-center p-3 bg-red-50 rounded-lg">
+                            <div class="text-2xl font-bold text-red-600">{{ passwords|length }}</div>
+                            <div class="text-sm text-gray-600">Total Passwords</div>
+                        </div>
+                        <div class="text-center p-3 bg-green-50 rounded-lg">
+                            <div class="text-2xl font-bold text-green-600">100%</div>
+                            <div class="text-sm text-gray-600">Encrypted</div>
+                        </div>
+                        <div class="text-center p-3 bg-blue-50 rounded-lg">
+                            <div class="text-2xl font-bold text-blue-600">{{ passwords|length }}</div>
+                            <div class="text-sm text-gray-600">Active Sites</div>
+                        </div>
+                        <div class="text-center p-3 bg-purple-50 rounded-lg">
+                            <div class="text-2xl font-bold text-purple-600">🕉️</div>
+                            <div class="text-sm text-gray-600">Sanskrit Powered</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Security Reminder -->
+                <div class="bg-white rounded-xl shadow-lg p-6 border border-gray-100">
+                    <h3 class="text-lg font-bold text-gray-900 mb-4">
+                        <i class="fas fa-shield-alt text-green-600 mr-2"></i>Security Reminder
+                    </h3>
+                    <p class="text-gray-600 text-sm mb-4">
+                        Remember to update your passwords regularly and never share them with others.
+                    </p>
+                    <div class="text-center p-4 bg-gray-50 rounded-lg">
+                        <div class="sanskrit-text text-lg mb-2">"सुरक्षा सर्वोत्तम धर्म"</div>
+                        <p class="text-xs text-gray-600">
+                            (Security is the highest duty)
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Password Modal -->
+<div id="passwordModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
+    <div class="bg-white rounded-xl shadow-2xl max-w-md w-full m-4">
+        <div class="p-6">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-lg font-bold text-gray-900">
+                    <i class="fas fa-key text-red-600 mr-2"></i>Password Revealed
+                </h3>
+                <button type="button" onclick="closePasswordModal()" class="text-gray-400 hover:text-gray-600">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            <div class="bg-gray-100 p-4 rounded-lg mb-4">
+                <code id="revealedPassword" class="text-lg font-mono break-all"></code>
+            </div>
+            <div class="flex gap-2">
+                <button type="button" onclick="copyRevealedPassword()" class="btn-primary flex-1">
+                    <i class="fas fa-copy mr-2"></i>Copy Password
+                </button>
+                <button type="button" onclick="closePasswordModal()" class="btn-secondary">Close</button>
+            </div>
+            <p class="text-xs text-gray-500 mt-3 text-center">
+                <i class="fas fa-clock mr-1"></i>This window will auto-close in 30 seconds
+            </p>
+        </div>
+    </div>
+</div>
+
+<script>
+let currentPassword = '';
+let modalTimeout = null;
+
+function showPassword(passwordId) {
+    fetch(`/api/get-password/${passwordId}`)
+        .then(response => {
+            if (!response.ok) throw new Error('Network response was not ok');
+            return response.json();
+        })
+        .then(data => {
+            if (data.success && data.password) {
+                currentPassword = data.password;
+                document.getElementById('revealedPassword').textContent = data.password;
+                document.getElementById('passwordModal').classList.remove('hidden');
+                // Auto-close after 30 seconds
+                modalTimeout = setTimeout(() => {
+                    closePasswordModal();
+                    showAlert('Password hidden for security', 'info');
+                }, 30000);
+            } else {
+                showAlert(data.error || 'Failed to retrieve password', 'error');
+            }
+        })
+        .catch(error => {
+            showAlert('Failed to retrieve password', 'error');
+            console.error('Error:', error);
+        });
+}
+
+function copyPassword(passwordId) {
+    fetch(`/api/get-password/${passwordId}`)
+        .then(response => {
+            if (!response.ok) throw new Error('Network response was not ok');
+            return response.json();
+        })
+        .then(data => {
+            if (data.success && data.password) {
+                if (navigator && navigator.clipboard) {
+                    navigator.clipboard.writeText(data.password).then(() => {
+                        showAlert('Password copied to clipboard!', 'success');
+                    }).catch(() => {
+                        showAlert('Could not copy to clipboard', 'error');
+                    });
+                } else {
+                    showAlert('Clipboard API not supported', 'error');
+                }
+            } else {
+                showAlert(data.error || 'Failed to copy password', 'error');
+            }
+        })
+        .catch(error => {
+            showAlert('Failed to copy password', 'error');
+            console.error('Error:', error);
+        });
+}
+
+function copyRevealedPassword() {
+    if (currentPassword) {
+        if (navigator && navigator.clipboard) {
+            navigator.clipboard.writeText(currentPassword).then(() => {
+                showAlert('Password copied to clipboard!', 'success');
+                closePasswordModal();
+            }).catch(() => {
+                showAlert('Could not copy to clipboard', 'error');
+            });
+        } else {
+            showAlert('Clipboard API not supported', 'error');
+        }
+    }
+}
+
+function closePasswordModal() {
+    document.getElementById('passwordModal').classList.add('hidden');
+    document.getElementById('revealedPassword').textContent = '';
+    currentPassword = '';
+    if (modalTimeout) {
+        clearTimeout(modalTimeout);
+        modalTimeout = null;
+    }
+}
+
+function deletePassword(passwordId) {
+    if (confirm('Are you sure you want to delete this password? This action cannot be undone.')) {
+        fetch(`/api/delete-password/${passwordId}`, { method: 'DELETE' })
+            .then(response => {
+                if (!response.ok) throw new Error('Network response was not ok');
+                return response.json();
+            })
+            .then(data => {
+                if (data.success) {
+                    showAlert('Password deleted successfully', 'success');
+                    setTimeout(() => location.reload(), 1000);
+                } else {
+                    showAlert(data.error || 'Failed to delete password', 'error');
+                }
+            })
+            .catch(error => {
+                showAlert('Failed to delete password', 'error');
+                console.error('Error:', error);
+            });
+    }
+}
+
+function exportPasswords() {
+    showAlert('Export functionality coming soon!', 'info');
+}
+
+function showSecurityTips() {
+    const tips = [
+        "Use unique passwords for each account",
+        "Enable two-factor authentication when available", 
+        "Update passwords every 3-6 months",
+        "Never share passwords via email or text",
+        "Use Sanskrit hints to remember passwords securely"
+    ];
+    alert("Security Tips:\n\n" + tips.map((tip, i) => `${i + 1}. ${tip}`).join('\n'));
+}
+
+function showAlert(message, type) {
+    const alertDiv = document.createElement('div');
+    alertDiv.className = `fixed top-20 right-4 z-50 p-4 rounded-lg shadow-lg animate-fade-in max-w-sm ${
+        type === 'error' ? 'bg-red-100 border border-red-300 text-red-700' :
+        type === 'success' ? 'bg-green-100 border border-green-300 text-green-700' :
+        type === 'warning' ? 'bg-yellow-100 border border-yellow-300 text-yellow-700' :
+        'bg-blue-100 border border-blue-300 text-blue-700'
+    }`;
+    alertDiv.innerHTML = `
+        <div class="flex items-center">
+            <i class="fas fa-${type === 'error' ? 'exclamation-circle' : type === 'success' ? 'check-circle' : 'info-circle'} mr-2"></i>
+            ${message}
+        </div>
+    `;
+    document.body.appendChild(alertDiv);
+    setTimeout(() => {
+        alertDiv.style.opacity = '0';
+        setTimeout(() => alertDiv.remove(), 300);
+    }, 4000);
+}
+
+// Close modal when clicking outside
+document.addEventListener('DOMContentLoaded', function() {
+    const modal = document.getElementById('passwordModal');
+    if (modal) {
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                closePasswordModal();
+            }
+        });
+    }
+});
+</script>
+{% endblock %}
